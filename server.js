@@ -20,7 +20,7 @@ app.get('/', async (req, res) => {
   const skip = pageSize * (currentPage - 1)
   const articles = await Article.find().sort({ createdAt: sort }).skip(skip).limit(pageSize);
   const allArticlesLength = await Article.find().count();
-  const totalPages = Math.round(allArticlesLength / pageSize);
+  const totalPages = Math.ceil(allArticlesLength / pageSize);
   res.render('articles/index', { articles: articles, currentPage, totalPages, sort })
 })
 
